@@ -28,15 +28,12 @@ Create a Google cloud account and create a project.
 1. Topic Name 
 
 ###  Create a Cloud function
-###requirements.txt 
+#### requirements.txt 
 pandas
 google-cloud-bigquery
 google-cloud-storage
 
-###main.py 
-Open Google cloud and navigate to IAM&ADMIN then click on Service accounts . Select your project and Navigate to keys tab.Click on Add key, Then a new key will be generated in JSON format. 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'clever-tooling-352705-1cb0301c4bc3.json'
-
+#### main.py 
 def gcs_to_bq(event=None, context=None):
     try:
 
