@@ -29,13 +29,13 @@ Create a Google cloud account and create a project.
 
 ###  Create a Cloud function
 
-requirements.txt 
+1. requirements.txt 
 pandas
 google-cloud-bigquery
 google-cloud-storage
 
-main.py 
-def gcs_to_bq(event=None, context=None):
+2. main.py 
+    def gcs_to_bq(event=None, context=None):
     try:
 
         PROJECT_ID ='clever-tooling-352705'
