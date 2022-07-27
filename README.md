@@ -97,3 +97,5 @@ def gcs_to_bq(event=None, context=None):
         print('nothing here today ',datetime)
         pass
 ```
+
+###  Create a Cloud Scheduler
