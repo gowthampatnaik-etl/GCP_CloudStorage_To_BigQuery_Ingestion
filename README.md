@@ -30,13 +30,15 @@ Create a Google cloud account and create a project.
 ###  Create a Cloud function
 
 requirements.txt 
-1. pandas
-2. google-cloud-bigquery
-3. google-cloud-storage
+```
+pandas
+google-cloud-bigquery
+google-cloud-storage
+```
 
 main.py 
-
-1. def gcs_to_bq(event=None, context=None):
+```
+def gcs_to_bq(event=None, context=None):
     try:
         PROJECT_ID ='clever-tooling-352705'
 
@@ -94,5 +96,4 @@ main.py
     except:
         print('nothing here today ',datetime)
         pass
-
-</sub>
+```
