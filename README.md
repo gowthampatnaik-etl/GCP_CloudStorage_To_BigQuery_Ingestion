@@ -9,3 +9,10 @@ Agenda is to ingest the files from Google cloud storage to Big Query using a Clo
 3. Big Query
 4. Pub/Sub 
 5. Cloud Scheduler 
+
+## Prerequisite 
+Create a Google cloud account and create a project.
+
+## Steps 
+
+### Create a bucket and place the file in Google Cloud Storage
