@@ -29,15 +29,15 @@ Create a Google cloud account and create a project.
 
 ###  Create a Cloud function
 
-1. requirements.txt 
-pandas
-google-cloud-bigquery
-google-cloud-storage
+requirements.txt 
+1. pandas
+2. google-cloud-bigquery
+3. google-cloud-storage
 
-2. main.py 
-    def gcs_to_bq(event=None, context=None):
+main.py 
+
+1. def gcs_to_bq(event=None, context=None):
     try:
-
         PROJECT_ID ='clever-tooling-352705'
 
         # Google storage bucket and source file details
@@ -95,3 +95,4 @@ google-cloud-storage
         print('nothing here today ',datetime)
         pass
 
+</sub>
