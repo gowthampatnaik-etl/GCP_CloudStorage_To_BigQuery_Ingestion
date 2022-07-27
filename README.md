@@ -28,12 +28,13 @@ Create a Google cloud account and create a project.
 1. Topic Name 
 
 ###  Create a Cloud function
-#### requirements.txt 
+
+requirements.txt 
 pandas
 google-cloud-bigquery
 google-cloud-storage
 
-#### main.py 
+main.py 
 def gcs_to_bq(event=None, context=None):
     try:
 
