@@ -27,7 +27,9 @@ Create a Google cloud account and create a project.
     <img src="https://user-images.githubusercontent.com/102896115/181431544-ec0f2697-b142-437f-8ada-275bee16230d.png" width="800" height="300">
 
 ###  Create a table in Big Query.
-1. Run the DDL. (Please find in Github repository)
+1. Run the DDL to create the table. (Please find in Github repository)
+
+    <img src="https://user-images.githubusercontent.com/102896115/181436892-e5c9ad22-5f9d-4e65-a8f1-d8f450d17e4a.png" width="800" height="300">
 
 ###  Create a Pub sub topic
 1. Topic Name - Cloud scheduler will send a message to cloud function though topic and triggers cloud function.
@@ -45,7 +47,7 @@ Steps to create cloud functionn :
 2. Select the trigger type as Pub/Sub and Select the topic that was created.
     
     <img src="https://user-images.githubusercontent.com/102896115/181431132-6ff5da82-aa70-441d-880a-0847b1c3b4a4.png" width="800" height="400">
-3. Click on next and chnage the runtime to Python 3.7 and type the entry point (gcs_to_bq). Copy the requirement.txt and main.py code then click on deplot to deploy      the code.
+3. Click on next and chnage the runtime to Python 3.7 and type the entry point (gcs_to_bq). Copy the requirement.txt and main.py code then click on deploy to deploy      the code.
     
     <img src="https://user-images.githubusercontent.com/102896115/181422755-e5c6a8fc-e5a5-4c7d-bf71-b7f518fa124a.png" width="800" height="500">
 
@@ -119,10 +121,12 @@ def gcs_to_bq(event=None, context=None):
 ```
 
 ###  Create a Cloud Scheduler
-    Cloud scheduler will triggers pub/sub/topic as per scheduled time and send a message to Cloud function to invoke it.
+1. Cloud scheduler will triggers pub/sub/topic as per scheduled time and send a message to Cloud function to invoke it.
+    Click on Create cloud scheduler and then specify the schdule time and select the pub/sub topic and submit.
 
-    ![image](https://user-images.githubusercontent.com/102896115/181433342-1c28e0a0-7a4a-4d25-9108-6906cd6a3ce2.png)
-    ![image](https://user-images.githubusercontent.com/102896115/181433164-ea80ce70-b26b-44c2-b522-4af6824f2050.png)
+    <img src="https://user-images.githubusercontent.com/102896115/181433342-1c28e0a0-7a4a-4d25-9108-6906cd6a3ce2.png" width="800" height="400">
+
+    <img src="https://user-images.githubusercontent.com/102896115/181433164-ea80ce70-b26b-44c2-b522-4af6824f2050.png" width="800" height="400">
     
 
 
