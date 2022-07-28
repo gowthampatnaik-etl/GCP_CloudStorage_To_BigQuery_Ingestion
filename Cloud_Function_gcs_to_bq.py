@@ -2,7 +2,7 @@
 
 #### gcs_to_bq Function
 
--------------------------------------------------------------requirements.txt-----------------------------------------------------------------
+-------------------------------------------------------------requirements.txt--------------------------------------------------------
 
 # Function dependencies, for example:
 # package>=version
@@ -31,7 +31,13 @@ def gcs_to_bq(event=None, context=None):
         # Google storage bucket and source file details
         BUCKET_NAME = 'myfirstbucket44'
         BUCKET_FOLDER = 'Sales'
-        FILE_NAME_PATTERN = 'Sales Data 2022-07-15.csv'
+        
+        # List the cloud storage bucket and get the filename
+        storage_client = storage.Client()
+        blobs = storage_client.list_blobs(BUCKET_NAME, prefix='Sales', delimiter='/')
+        for blob in blobs:
+            FILE_NAME_PATTERN = blob.name
+            print(FILE_NAME_PATTERN)
 
         # Big Query table details
         DATASET = 'sales'
@@ -68,7 +74,7 @@ def gcs_to_bq(event=None, context=None):
             # The source format defaults to CSV, so the line below is optional.
             source_format=bigquery.SourceFormat.CSV,
         )
-        uri = "gs://" + BUCKET_NAME +"/"+ BUCKET_FOLDER +"/" + FILE_NAME_PATTERN
+        uri = "gs://" + BUCKET_NAME  +"/" + FILE_NAME_PATTERN
 
         load_job = Client.load_table_from_uri(
             uri, TABLE_ID, job_config=job_config
@@ -78,6 +84,12 @@ def gcs_to_bq(event=None, context=None):
 
         destination_table = Client.get_table(TABLE_ID)  # Make an API request.
         print("Loaded {} rows.".format(destination_table.num_rows))
+
+        # Move the file to archive folder once the process is completed
+        bucket = storage_client.get_bucket(BUCKET_NAME)
+        blob = bucket.get_blob(FILE_NAME_PATTERN)
+        print(blob.name)
+        bucket.rename_blob(blob, 'archive/'+FILE_NAME_PATTERN)
 
     except:
         print('nothing here today ',datetime)
