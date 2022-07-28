@@ -122,10 +122,10 @@ def gcs_to_bq(event=None, context=None):
 ```
 
 ###  Create a Cloud Scheduler
-1. Cloud scheduler will triggers pub/sub/topic as per scheduled time and send a message to Cloud function to invoke it.
+1. Cloud scheduler will triggers pub/sub/topic as per scheduled time(daily at 1am) and send a message to Cloud function to invoke it.
     Click on Create cloud scheduler and then specify the schdule time and select the pub/sub topic and submit.
 
-    <img src="https://user-images.githubusercontent.com/102896115/181433342-1c28e0a0-7a4a-4d25-9108-6906cd6a3ce2.png" width="800" height="400">
+    <img src="https://user-images.githubusercontent.com/102896115/181454613-71849045-da25-4916-8ef2-0d288c1eb946.png" width="800" height="400">
 
     <img src="https://user-images.githubusercontent.com/102896115/181433164-ea80ce70-b26b-44c2-b522-4af6824f2050.png" width="800" height="400">
     
