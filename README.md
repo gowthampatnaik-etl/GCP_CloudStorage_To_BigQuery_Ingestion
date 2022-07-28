@@ -3,6 +3,9 @@
 
 Agenda is to ingest the files from Google cloud storage to Big Query using a Cloud function.
 
+## Prerequisite 
+Create a Google cloud account and create a project.
+
 ## GCP Services Used :
 1. Google Cloud Function
 2. Google Cloud Storage
@@ -10,8 +13,6 @@ Agenda is to ingest the files from Google cloud storage to Big Query using a Clo
 4. Pub/Sub 
 5. Cloud Scheduler 
 
-## Prerequisite 
-Create a Google cloud account and create a project.
 
 ## Steps 
 
@@ -25,9 +26,21 @@ Create a Google cloud account and create a project.
 1. Run the DDL. (Please find in Github repository)
 
 ###  Create a Pub sub topic
-1. Topic Name 
+1. Topic Name - Cloud scheduler will send a message to cloud function though topic and triggers cloud function.
+![image](https://user-images.githubusercontent.com/102896115/181421836-457ff5aa-c91b-4ae1-bd51-0e02bc72a219.png)
+
 
 ###  Create a Cloud function
+Cloud function will gets triggered once the message from topic is received and ingests the data from Cloud storage to Big Query.
+
+Steps to create cloud functionn :
+1. Create a Cloud function from the GCP service as shown below -
+    ![image](https://user-images.githubusercontent.com/102896115/181422314-67aabe72-3d40-45d2-a351-6f68e780a69f.png)
+2. Select the trigger type as Pub/Sub and Select the topic that was created.
+    ![image](https://user-images.githubusercontent.com/102896115/181422500-abba2bda-6681-412c-9b14-cf797e4ac2d5.png)
+3. Click on next and chnage the runtime to Python 3.7 and type the entry point (gcs_to_bq). Copy the requirement.txt and main.py code then click on deplot to deploy      the code.
+    ![image](https://user-images.githubusercontent.com/102896115/181422755-e5c6a8fc-e5a5-4c7d-bf71-b7f518fa124a.png)
+
 
 requirements.txt 
 ```
