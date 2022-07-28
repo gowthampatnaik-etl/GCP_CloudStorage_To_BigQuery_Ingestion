@@ -25,7 +25,7 @@ Source file is having sales data for the previous day. We will be receiving file
 1. Login to your project and open "Cloud Storage" service and Create a Bucket.
 2. Upload the Source/input file in the bucket.(Please find in Github repository)
 
-    <img src="https://user-images.githubusercontent.com/102896115/181431544-ec0f2697-b142-437f-8ada-275bee16230d.png" width="800" height="300">
+    <img src="https://user-images.githubusercontent.com/102896115/181521534-1e8d427e-b8e6-4a54-a4f0-8e92ee0ebacf.png" width="800" height="300">
 
 ###  Create a table in Big Query.
 1. Run the DDL to create the table. (Please find in Github repository)
@@ -61,14 +61,30 @@ google-cloud-storage
 
 main.py 
 ```
+import pandas 
+import datetime
+from google.cloud import bigquery
+from google.cloud import storage
+from google.cloud.exceptions import NotFound
+
+# Open Google cloud and navigate to IAM&ADMIN then click on Service accounts . Select your project and Navigate to keys tab.Click on Add key, Then a new key will be generated in JSON format. 
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'clever-tooling-352705-1cb0301c4bc3.json'
+
 def gcs_to_bq(event=None, context=None):
     try:
+
         PROJECT_ID ='clever-tooling-352705'
 
         # Google storage bucket and source file details
         BUCKET_NAME = 'myfirstbucket44'
         BUCKET_FOLDER = 'Sales'
-        FILE_NAME_PATTERN = 'Sales Data 2022-07-15.csv'
+        
+        # List the cloud storage bucket and get the filename
+        storage_client = storage.Client()
+        blobs = storage_client.list_blobs(BUCKET_NAME, prefix='Sales', delimiter='/')
+        for blob in blobs:
+            FILE_NAME_PATTERN = blob.name
+            print(FILE_NAME_PATTERN)
 
         # Big Query table details
         DATASET = 'sales'
@@ -105,7 +121,7 @@ def gcs_to_bq(event=None, context=None):
             # The source format defaults to CSV, so the line below is optional.
             source_format=bigquery.SourceFormat.CSV,
         )
-        uri = "gs://" + BUCKET_NAME +"/"+ BUCKET_FOLDER +"/" + FILE_NAME_PATTERN
+        uri = "gs://" + BUCKET_NAME  +"/" + FILE_NAME_PATTERN
 
         load_job = Client.load_table_from_uri(
             uri, TABLE_ID, job_config=job_config
@@ -115,6 +131,12 @@ def gcs_to_bq(event=None, context=None):
 
         destination_table = Client.get_table(TABLE_ID)  # Make an API request.
         print("Loaded {} rows.".format(destination_table.num_rows))
+
+        # Move the file to archive folder once the process is completed
+        bucket = storage_client.get_bucket(BUCKET_NAME)
+        blob = bucket.get_blob(FILE_NAME_PATTERN)
+        print(blob.name)
+        bucket.rename_blob(blob, 'archive/'+FILE_NAME_PATTERN)
 
     except:
         print('nothing here today ',datetime)
