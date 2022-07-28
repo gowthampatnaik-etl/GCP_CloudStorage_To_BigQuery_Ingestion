@@ -3,6 +3,9 @@
 
 Agenda is to ingest the files from Google cloud storage to Big Query using a Cloud function.
 
+Once a day (schedule configurable), the Cloud Scheduler dispatches a trigger message, that is consumed by the 
+Cloud Function (CF) immediately. CF then  ingests the data from file present in Google cloud storage to Big Query table.
+
 ## Prerequisite 
 Create a Google cloud account and create a project.
 
@@ -14,7 +17,7 @@ Create a Google cloud account and create a project.
 5. Cloud Scheduler 
 
 
-## Steps 
+## Steps to create the process -
 
 ### Create a bucket and place the file in Google Cloud Storage
 
@@ -116,10 +119,10 @@ def gcs_to_bq(event=None, context=None):
 ```
 
 ###  Create a Cloud Scheduler
+    Cloud scheduler will triggers pub/sub/topic as per scheduled time and send a message to Cloud function to invoke it.
 
-    <img src="https://user-images.githubusercontent.com/102896115/181432424-0eff779c-c9ba-4a06-9c33-ba38cc695cfe.png" width="800" height="300">
-    
-    <img src="https://user-images.githubusercontent.com/102896115/181432478-fb6fcd99-dc1f-445d-90a2-95cc1284c01a.png" width="800" height="400">
+    ![image](https://user-images.githubusercontent.com/102896115/181433342-1c28e0a0-7a4a-4d25-9108-6906cd6a3ce2.png)
+    ![image](https://user-images.githubusercontent.com/102896115/181433164-ea80ce70-b26b-44c2-b522-4af6824f2050.png)
     
 
 
