@@ -20,6 +20,7 @@ Create a Google cloud account and create a project.
 ## Steps to create the process -
 
 ### Create a bucket and place the file in Google Cloud Storage
+Source file is having sales data for the previous day. We will be receiving file daily in the Cloud storage bucket.
 
 1. Login to your project and open "Cloud Storage" service and Create a Bucket.
 2. Upload the Source/input file in the bucket.(Please find in Github repository)
